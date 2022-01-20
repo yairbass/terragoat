@@ -4,6 +4,7 @@ resource "aws_s3_bucket" "data" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "${local.resource_prefix.value}-data"
+  acl           = "public-read"
   force_destroy = true
   tags = merge({
     Name        = "${local.resource_prefix.value}-data"
@@ -24,6 +25,9 @@ resource "aws_s3_bucket" "data" {
         sse_algorithm = "AES256"
       }
     }
+  }
+  versioning {
+    enabled = true
   }
 }
 
